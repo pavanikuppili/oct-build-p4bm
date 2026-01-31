@@ -10,7 +10,7 @@ request = pc.makeRequestRSpec()
 
 RAM = [16, 32, 64]
 CPU = [2, 4, 8]
-toolVersion = ['2023.2', '2023.1'] 
+toolVersion = ['2024.2'] 
 
 pc.defineParameter("RAM",  "RAM (GB)",
                    portal.ParameterType.INTEGER, RAM[0], RAM,
