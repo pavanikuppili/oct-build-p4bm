@@ -30,13 +30,21 @@ pc.defineParameter("remoteDesktop", "Remote Desktop Access",
                    advanced=False,
                    longDescription="Enable remote desktop access by installing GNOME desktop and VNC server.")
 
+pc.defineParameter(
+    "diskImage", "Disk Image",
+    portal.ParameterType.IMAGE,
+    "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD",
+    longDescription="Pick an Alveo image (search 'alveo-2023.1' or 'alveo-2023.2')."
+)
+
 params = pc.bindParameters() 
  
 # Create a XenVM
 
 node = request.XenVM('fpga-tools',exclusive=False)
 node.component_manager_id = "urn:publicid:IDN+cloudlab.umass.edu+authority+cm"
-node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD"
+node.disk_image = params.diskImage
+#node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD" // alveo-2023.1-ubuntu-22.04
 node.setFailureAction('nonfatal')
 node.Desire("FPGA-Build-Pool", 1.0)
 
